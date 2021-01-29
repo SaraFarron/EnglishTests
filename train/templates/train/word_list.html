@@ -1,0 +1,86 @@
+{% extends 'train/base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="row" style="position: relative; left: 10%">
+  <div class="col-lg-5">
+    <h2>file upload</h2>
+    <form action="" method="POST" id="uploader">
+      <input type="file" multiple>
+      <p>Drag your files here or click in this area.</p>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+  <div class="col-lg-5">
+    <h2>search and results</h2>
+{#    <form class="form-inline my-2 my-lg-0">#}
+{#      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+{#      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+{#    </form>#}
+    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+    <ul id="myMenu">
+      <li><a href="#">HTML</a></li>
+      <li><a href="#">CSS</a></li>
+      <li><a href="#">JavaScript</a></li>
+      <li><a href="#">PHP</a></li>
+      <li><a href="#">Python</a></li>
+      <li><a href="#">jQuery</a></li>
+      <li><a href="#">SQL</a></li>
+      <li><a href="#">Bootstrap</a></li>
+      <li><a href="#">Node.js</a></li>
+    </ul>
+  </div>
+</div>
+<div class="row" style="position: relative; left: 10%">
+  <div class="col-lg-5">
+    <h2>new words detected</h2>
+    <div class="container bg-dark text-light"
+      style="margin-top: 10px; border-radius: 5px; font-size: 30px">
+      <div class="row" style="margin: 10px">
+        <div class="col-sm">
+          New words detected:
+        </div>
+        <div class="col-sm">
+          str
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <h2>add words manually</h2>
+    <div class="container bg-dark text-light"
+      style="margin-top: 10px; border-radius: 5px; font-size: 30px">
+      <div class="row" style="margin: 10px">
+        <div class="col-sm">
+          New words detected:
+        </div>
+        <div class="col-sm">
+          str
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("mySearch");
+  filter = input.value.toUpperCase(); // non case sensitive
+  ul = document.getElementById("myMenu");
+  li = ul.getElementsByTagName("li");
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
+{% endblock %}

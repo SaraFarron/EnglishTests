@@ -1,0 +1,46 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand"
+     href="http://127.0.0.1:8000/train/?#">Home</a>
+  <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link"
+           href="http://127.0.0.1:8000/train/list">List <span class="sr-only">(current)</span></a>
+      </li>
+{#      <li class="nav-item">#}
+{#        <a class="nav-link"#}
+{#           href="http://127.0.0.1:8000/train/detail">Detail</a>#}
+{#      </li>#}
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle"
+           href="http://127.0.0.1:8000/train/training"
+           id="navbarDropdown"
+           role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+          Training
+        </a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item text-light" href="http://127.0.0.1:8000/train/training">10</a>
+          <a class="dropdown-item text-light" href="#">25</a>
+          <a class="dropdown-item text-light" href="#">50</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="http://127.0.0.1:8000/admin">Admin</a>
+      </li>
+    </ul>
+  </div>
+</nav>

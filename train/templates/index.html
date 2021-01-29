@@ -1,0 +1,58 @@
+{% extends 'train/base.html' %}
+{#{% load static %}#}
+{% block content %}
+
+<div class="container bg-dark text-light"
+     style="margin-top: 10px; border-radius: 5px; font-size: 30px">
+  <div class="row" style="margin: 10px">
+    <div class="col-sm">
+      Username
+    </div>
+    <div class="col-sm">
+      str
+    </div>
+{#    <div class="col-sm">#}
+{#      Last upload#}
+{#    </div>#}
+  </div>
+  <div class="row" style="margin: 10px">
+    <div class="col-sm">
+      Number of words
+    </div>
+    <div class="col-sm">
+      {{ number_of_words }}
+    </div>
+{#    <div class="col-sm">#}
+{#      One of three columns#}
+{#    </div>#}
+  </div>
+  <div class="row" style="margin: 10px">
+    <div class="col-sm">
+      Last upload
+    </div>
+    <div class="col-sm">
+      date(str)
+    </div>
+{#    <div class="col-sm">#}
+{#      One of three columns#}
+{#    </div>#}
+  </div>
+  <div class="row" style="margin: 10px">
+    <div class="col-sm">
+      Words learned
+    </div>
+    <div class="col-sm">
+      {{ number_of_learned_words }}
+    </div>
+  </div>
+  <div class="row" style="margin: 10px">
+    <div class="col-sm">
+      Currently learning
+    </div>
+    <div class="col-sm">
+      {{ number_of_words_in_progress }}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
