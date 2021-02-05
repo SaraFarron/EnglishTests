@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'train.apps.TrainConfig'
+    'train.apps.TrainConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

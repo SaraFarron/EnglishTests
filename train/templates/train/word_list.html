@@ -5,7 +5,6 @@
 <br>
 <div class="row" style="position: relative; left: 10%">
   <div class="col-lg-5">
-    <h2>file upload</h2>
     <form action="" method="POST" id="uploader">
       <input type="file" multiple>
       <p>Drag your files here or click in this area.</p>
@@ -13,28 +12,23 @@
     </form>
   </div>
   <div class="col-lg-5">
-    <h2>search and results</h2>
-{#    <form class="form-inline my-2 my-lg-0">#}
-{#      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-{#      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
-{#    </form>#}
-    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+    <h2>todo: maximum 4 results</h2>
+    <input type="text"
+           id="mySearch"
+           onkeyup="myFunction()"
+           placeholder="Search..."
+           title="Type in a category">
     <ul id="myMenu">
-      <li><a href="#">HTML</a></li>
-      <li><a href="#">CSS</a></li>
-      <li><a href="#">JavaScript</a></li>
-      <li><a href="#">PHP</a></li>
-      <li><a href="#">Python</a></li>
-      <li><a href="#">jQuery</a></li>
-      <li><a href="#">SQL</a></li>
-      <li><a href="#">Bootstrap</a></li>
-      <li><a href="#">Node.js</a></li>
+        {% for word in words %}
+      <li>{{ word.english }} - {{ word.russian }}</li>
+            <a href="{% url 'train:update_translation' word.id %}" class="btn btn-sm btn-info">Update</a>
+            <a href="{% url 'train:delete_translation' word.id %}" class="btn btn-sm btn-danger">Delete</a>
+        {% endfor %}
     </ul>
   </div>
 </div>
 <div class="row" style="position: relative; left: 10%">
   <div class="col-lg-5">
-    <h2>new words detected</h2>
     <div class="container bg-dark text-light"
       style="margin-top: 10px; border-radius: 5px; font-size: 30px">
       <div class="row" style="margin: 10px">
@@ -42,24 +36,31 @@
           New words detected:
         </div>
         <div class="col-sm">
-          str
+          int
         </div>
       </div>
     </div>
   </div>
   <div class="col-lg-5">
     <h2>add words manually</h2>
-    <div class="container bg-dark text-light"
-      style="margin-top: 10px; border-radius: 5px; font-size: 30px">
-      <div class="row" style="margin: 10px">
-        <div class="col-sm">
-          New words detected:
-        </div>
-        <div class="col-sm">
-          str
-        </div>
-      </div>
-    </div>
+    <a class="btn-dark" href="http://127.0.0.1:8000/train/list/add">add it</a>
+    <input type="text"
+    id="add_word"
+    placeholder="english"
+    title="Type in english translation">
+    <input type="text"
+    id="add_word"
+    placeholder="russian"
+    title="Type in russian translation">
+    <button type="submit" id="add_word_button">Add</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-5">
+      <form method="get">
+          {{ my_filter.form }}
+          <button class="btn btn-primary" type="submit">Search</button>
+      </form>
   </div>
 </div>
 

@@ -3,5 +3,5 @@ from .models import *
 
 
 admin.site.register(Word)
-admin.site.register(User)
+# admin.site.register(User)
 # Register your models here.

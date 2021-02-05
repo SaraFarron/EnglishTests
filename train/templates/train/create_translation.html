@@ -1,0 +1,22 @@
+{% extends 'train/base.html' %}
+{% load static %}
+{% block content %}
+
+      <form action="" method="POST">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" name="Submit" id="add_word_button">
+      </form>
+
+
+{#        <input type="text"#}
+{#    id="add_word"#}
+{#    placeholder="english"#}
+{#    title="Type in english translation">#}
+{#    <input type="text"#}
+{#    id="add_word"#}
+{#    placeholder="russian"#}
+{#    title="Type in russian translation">#}
+{#    <button type="submit" id="add_word_button">Add</button>#}
+
+{% endblock %}

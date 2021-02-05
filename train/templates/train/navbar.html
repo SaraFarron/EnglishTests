@@ -11,17 +11,12 @@
           aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link"
            href="http://127.0.0.1:8000/train/list">List <span class="sr-only">(current)</span></a>
       </li>
-{#      <li class="nav-item">#}
-{#        <a class="nav-link"#}
-{#           href="http://127.0.0.1:8000/train/detail">Detail</a>#}
-{#      </li>#}
       <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle"
            href="http://127.0.0.1:8000/train/training"
@@ -43,4 +38,6 @@
       </li>
     </ul>
   </div>
+    <span class="hello-msg">Hello, {{ request.user }}</span>
+    <span class="hello-msg"><a href="{% url 'train:logout' %}">Logout</a></span>
 </nav>

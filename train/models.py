@@ -11,8 +11,8 @@ class Word(models.Model):
         return self.english
 
 
-class User(models.Model):
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=100)
-    email = models.EmailField()
-    words = models.ForeignKey(Word, on_delete=models.CASCADE)
+# class User(models.Model):
+#     username = models.CharField(max_length=50)
+#     password = models.CharField(max_length=100)
+#     email = models.EmailField()
+#     words = models.ForeignKey(Word, on_delete=models.CASCADE)
