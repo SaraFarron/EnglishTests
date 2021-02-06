@@ -33,9 +33,11 @@
           <a class="dropdown-item text-light" href="#">50</a>
         </div>
       </li>
+        {% if request.user.is_staff %}
       <li class="nav-item active">
         <a class="nav-link" href="http://127.0.0.1:8000/admin">Admin</a>
       </li>
+        {% endif %}
     </ul>
   </div>
     <span class="hello-msg">Hello, {{ request.user }}</span>

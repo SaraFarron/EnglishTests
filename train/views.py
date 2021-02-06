@@ -2,13 +2,16 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import WordForm, CreateUserForm
 from .filters import WordFilter
+from .decorators import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'user'])
 def index(request):
     words = Word.objects.all()
     number_of_words = len(words)
@@ -26,40 +29,46 @@ def index(request):
     })
 
 
+@unauthenticated_user
 def register_page(request):
-    if request.user.is_authenticated:
-        return redirect('train:index')
-    else:
-        form = CreateUserForm
+    form = CreateUserForm
 
-        if request.method == 'POST':
-            form = CreateUserForm(request.POST)
-            if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                messages.success(request, 'Account was created for ' + user)
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
 
-                return redirect('train:login')
+            group = Group.objects.get(name='user')
+            user.groups.add(group)
 
-        context = {'form': form}
-        return render(request, 'train/register.html', context)
+            messages.success(request, 'Account was created for ' + username)
+
+            return redirect('train:login')
+
+    context = {'form': form}
+    return render(request, 'train/register.html', context)
 
 
+@login_required(login_url='login')
+def user_page(request):
+    context = {}
+    return render(request, 'train/user.html')
+
+
+@unauthenticated_user
 def login_page(request):
-    if request.user.is_authenticated:
-        return redirect('train:index')
-    else:
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('train:index')
-            else:
-                messages.info(request, 'Username or password is incorrect')
-        context = {}
-        return render(request, 'train/login.html', context)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('train:index')
+        else:
+            messages.info(request, 'Username or password is incorrect')
+    context = {}
+    return render(request, 'train/login.html', context)
 
 
 def logout_user(request):
