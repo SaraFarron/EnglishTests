@@ -6,7 +6,6 @@ from .models import *
 class WordFilter(django_filters.FilterSet):
     english = CharFilter(field_name='english', lookup_expr='icontains')
 
-
     class Meta:
         model = Word
         fields = '__all__'
