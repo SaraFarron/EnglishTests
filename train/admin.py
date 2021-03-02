@@ -4,4 +4,4 @@ from .models import *
 
 admin.site.register(Word)
 admin.site.register(Pupil)
-
+admin.site.register(Snippet)
