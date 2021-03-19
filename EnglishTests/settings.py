@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'train.apps.TrainConfig',
     'django_filters',
     'rest_framework',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [

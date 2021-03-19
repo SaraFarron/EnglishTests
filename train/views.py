@@ -22,10 +22,11 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework import generics
 from .permissions import IsOwnerOrReadOnly
+from django.views.generic import View
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin', 'user'])
+# @allowed_users(allowed_roles=['admin', 'user'])
 def index(request):
 
     words = Word.objects.all()
@@ -106,56 +107,84 @@ def logout_user(request):
     return redirect('train:login')
 
 
-@login_required(login_url='login')
-def word_list(request):
+class WordList(View):
 
-    words = Word.objects.all()
-    my_filter = WordFilter(request.GET, queryset=words)
-    words_for_filter = my_filter.qs
+    @login_required(login_url='login')
+    def get(self, request):
+        words = Word.objects.all()
+        my_filter = WordFilter(request.GET, queryset=words)
+        words_for_filter = my_filter.qs
 
-    context = {'words': words, 'my_filter': words_for_filter}
-    return render(request, 'train/word_list.html', context)
+        context = {'words': words, 'my_filter': words_for_filter}
+        return render(request, 'train/word_list.html', context)
 
 
-@login_required(login_url='login')
-def create_translation(request):
+# class TranslationView(View):
+#     def get(self, request):
+#         form = WordForm()
+#
+#         context = {'form': form}
+#         return render(request, 'train/create_translation.html', context)
+#
+#     def post(self, request):
+#         word = Word.objects.get(pk=2)
+#         form = WordForm(request.POST, instance=word)
+#
+#         if form.is_valid():
+#             print(form.cleaned_data['russian'])
+#             form.save()
+#
+#         context = {'form': form}
+#         return render(request, 'index.html', context)
 
-    if request.method == 'POST':
+
+class CreateTranslation(View):
+
+    @login_required(login_url='login')
+    def get(self, request):
+        form = WordForm()
+
+        context = {'form': form}
+        return render(request, 'train/create_translation.html', context)
+
+    def post(self, request):
+
         form = WordForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/train/list')
-    form = WordForm()
-
-    context = {'form': form}
-    return render(request, 'train/create_translation.html', context)
 
 
-@login_required(login_url='login')
-def update_translation(request, pk):
+class UpdateTranslation(View):
 
-    word = Word.objects.get(id=pk)
-    form = WordForm(instance=word)
-    if request.method == 'POST':
-        form = WordForm(request.POST, instance=word)
+    @login_required(login_url='login')
+    def get(self, request, pk):
+        word = Word.objects.get(id=pk)
+        form = WordForm(instance=word)
+
+        context = {'form': form}
+        return render(request, 'train/create_translation.html', context)
+
+    def post(self, request):
+        form = WordForm(request.POST, instance=self.word)
         if form.is_valid():
             form.save()
             return redirect('/train/list')
 
-    context = {'form': form}
-    return render(request, 'train/create_translation.html', context)
 
+class DeleteTranslation(View):
 
-@login_required(login_url='login')
-def delete_translation(request, pk):
+    @login_required(login_url='login')
+    def get(self, request, pk):
+        word = Word.objects.get(id=pk)
 
-    word = Word.objects.get(id=pk)
-    if request.method == 'POST':
-        word.delete()
+        context = {'item': word}
+        return render(request, 'train/delete_translation.html', context)
+
+    def post(self, request):
+        self.word.delete()
         return redirect('/train/list')
 
-    context = {'item': word}
-    return render(request, 'train/delete_translation.html', context)
 
 
 @login_required(login_url='login')

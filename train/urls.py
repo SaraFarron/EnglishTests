@@ -5,12 +5,12 @@ from rest_framework.urlpatterns import format_suffix_patterns
 app_name = 'train'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('list/', views.word_list, name='list'),
+    path('list/', views.WordList.as_view, name='list'),
     path('training/', views.training, name='training'),
 
-    path('list/add/', views.create_translation, name='create_translation'),
-    path('list/update/<str:pk>/', views.update_translation, name='update_translation'),
-    path('list/delete/<str:pk>/', views.delete_translation, name='delete_translation'),
+    path('list/add/', views.CreateTranslation.as_view, name='create_translation'),
+    path('list/update/<str:pk>/', views.UpdateTranslation.as_view, name='update_translation'),
+    path('list/delete/<str:pk>/', views.DeleteTranslation.as_view, name='delete_translation'),
 
     path('register', views.register_page, name='register'),
     path('login', views.login_page, name='login'),
