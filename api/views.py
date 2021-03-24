@@ -8,7 +8,7 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from .models import *
 from .serializers import *
 
-# Добавить домашнюю страницу, профиль, список всех вопросов в базе, логин, регистрацию, тестирование
+
 class HomeView():
     pass
 
@@ -20,12 +20,12 @@ class ProfileView(ModelViewSet):
         return self.request.user
 
     def get_queryset(self):
-        # return Word.objects.
-        pass
+        return User.objects.get(id=self.request.user)
 
 
-class DictionaryView():
-    pass
+class DictionaryView(ListModelMixin, ModelViewSet):
+    queryset = Word.objects.all()
+    serializer_class = WordSerializer
 
 
 class RegistrationView():
@@ -34,3 +34,6 @@ class RegistrationView():
 
 class LoginView():
     pass
+
+# TODO Добавить домашнюю страницу, профиль, список всех вопросов в базе, логин,
+#  регистрацию, тестирование
