@@ -3,12 +3,12 @@ from . import views
 
 app_name = 'api'
 urlpatterns = [
-    path('', views.HomeView, name='home'),
-    path('list/', views.DictionaryView, name='dictionary'),
+    path('', views.HomeView.as_view, name='home'),
+    path('list/', views.DictionaryView.as_view, name='dictionary'),
 
-    path('register', views.RegistrationView, name='register'),
-    path('login', views.LoginView, name='login'),
+    path('register', views.RegistrationView.as_view, name='register'),
+    path('login', views.LoginView.as_view, name='login'),
     # path('logout', views.logout_user, name='logout'),
-    path('user/<int:pk>', views.ProfileView, name='profile'),
+    path('user/<int:pk>', views.ProfileView.as_view, name='profile'),
 ]
 
