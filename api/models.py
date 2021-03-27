@@ -11,7 +11,5 @@ class Word(models.Model):
 class User(AbstractBaseUser):
     email = models.EmailField(unique=True, null=True, blank=True)
     username = models.CharField(max_length=100)
-    words_for_learning = models.ManyToManyField(Word, blank=True, related_name='words_for_learning')
-    words_learned = models.ManyToManyField(Word, blank=True, related_name='words_learned')
-
-# Maybe add class word_learned
+    words_for_learning = models.ManyToManyField(Word, blank=True, related_name="words_for_learning")
+    words_learned = models.ManyToManyField(Word, blank=True, related_name="words_learned")
