@@ -9,12 +9,12 @@ from .models import *
 from .serializers import *
 
 
-class HomeView(ListModelMixin, GenericViewSet):
+class HomeViewSet(ListModelMixin, GenericViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
 
-class ProfileView(ModelViewSet):
+class ProfileViewSet(ModelViewSet):
     serializer_class = UserSerializer
 
     def get_object(self):
@@ -24,17 +24,18 @@ class ProfileView(ModelViewSet):
         return User.objects.get(id=self.request.user)
 
 
-class DictionaryView(ModelViewSet, ListModelMixin):
-    queryset = Word.objects.all()
+class DictionaryViewSet(GenericViewSet, ListModelMixin, CreateModelMixin):
     serializer_class = WordSerializer
+    queryset = Word.objects.all()
 
 
-class RegistrationView(ModelViewSet):
-    pass
+class RegistrationViewSet(ModelViewSet, CreateModelMixin):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
 
 
-class LoginView(ModelViewSet):
-    pass
+class LoginViewSet(ModelViewSet):
+    queryset = User.objects.all()
 
 # TODO Добавить домашнюю страницу, профиль, список всех вопросов в базе, логин,
 #  регистрацию, тестирование

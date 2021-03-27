@@ -1,14 +1,23 @@
-from django.urls import path
+from django.conf.urls import url, include
 from . import views
+from rest_framework.routers import DefaultRouter
+
 
 app_name = 'api'
+router = DefaultRouter()
+
+router.register('home', views.HomeViewSet, basename='home')
+router.register('dictionary', views.DictionaryViewSet, basename='dictionary')
+router.register('register', views.RegistrationViewSet, basename='register')
+router.register('login', views.LoginViewSet, basename='login')
+router.register('profile', views.ProfileViewSet, basename='profile')
+
 urlpatterns = [
-    path('', views.HomeView.as_view, name='home'),
-    path('list/', views.DictionaryView.as_view, name='dictionary'),
+    url(r'^', include(router.urls)),
+    url(r'^', include(router.urls)),
 
-    path('register', views.RegistrationView.as_view, name='register'),
-    path('login', views.LoginView.as_view, name='login'),
-    # path('logout', views.logout_user, name='logout'),
-    path('user/<int:pk>', views.ProfileView.as_view, name='profile'),
+    url(r'^', include(router.urls)),
+    url(r'^', include(router.urls)),
+    # url(r'^', include(router.urls)),
+    url(r'^', include(router.urls)),
 ]
-
